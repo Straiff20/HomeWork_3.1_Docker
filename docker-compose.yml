@@ -1,0 +1,28 @@
+# Use postgres/example user/password credentials
+#- type: bind
+ #   source: ./pg_data
+  #  target: /var/lib/postgresql/data
+version: '3.7'
+
+services:
+
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: netology
+      POSTGRES_USER: vasya
+      POSTGRES_DB: test
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  pgdata:
